@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="吉本4劇場の公演スケジュールと芸人出演予定をまとめて検索する個人用アプリ">
+    <meta name="theme-color" content="#c93c32">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="吉本劇場">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>吉本劇場スケジュール検索</title>
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="icon" href="./icons/icon-192.png">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="app">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Yoshimoto Theater Watch</p>
+          <h1>吉本4劇場スケジュール</h1>
+        </div>
+        <button class="ghost-button" id="refreshButton" type="button">更新</button>
+      </header>
+
+      <main>
+        <section class="control-band" aria-label="条件">
+          <div class="tabs" role="tablist" aria-label="表示切替">
+            <button class="tab is-active" id="dateTab" type="button" role="tab" aria-selected="true">日付</button>
+            <button class="tab" id="searchTab" type="button" role="tab" aria-selected="false">芸人検索</button>
+          </div>
+
+          <div class="theater-filter" id="theaterFilter" aria-label="劇場選択"></div>
+        </section>
+
+        <section class="mode-panel is-active" id="datePanel" aria-labelledby="dateTab">
+          <div class="input-row">
+            <label class="field">
+              <span>日付</span>
+              <input id="dateInput" type="date">
+            </label>
+            <button class="primary-button" id="loadDateButton" type="button">表示</button>
+          </div>
+          <div class="status-line" id="dateStatus"></div>
+          <div class="results" id="dateResults"></div>
+        </section>
+
+        <section class="mode-panel" id="searchPanel" aria-labelledby="searchTab">
+          <div class="input-row search-row">
+            <label class="field search-field">
+              <span>芸名</span>
+              <input id="artistInput" type="search" placeholder="例：ロングコートダディ">
+            </label>
+            <label class="field">
+              <span>開始日</span>
+              <input id="searchFromInput" type="date">
+            </label>
+            <label class="field">
+              <span>終了日</span>
+              <input id="searchToInput" type="date">
+            </label>
+            <button class="primary-button" id="searchButton" type="button">検索</button>
+          </div>
+          <div class="status-line" id="searchStatus"></div>
+          <div class="results" id="searchResults"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="eventTemplate">
+      <article class="event-card">
+        <div class="event-head">
+          <div>
+            <p class="event-date"></p>
+            <h2 class="event-title"></h2>
+          </div>
+          <span class="theater-badge"></span>
+        </div>
+        <dl class="event-meta">
+          <div>
+            <dt>時間</dt>
+            <dd class="event-time"></dd>
+          </div>
+          <div>
+            <dt>出演</dt>
+            <dd class="event-members"></dd>
+          </div>
+        </dl>
+        <div class="event-links"></div>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
