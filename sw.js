@@ -1,4 +1,4 @@
-const CACHE_NAME = "yoshimoto-theater-schedule-v1";
+const CACHE_NAME = "yoshimoto-theater-schedule-v2";
 const APP_SHELL = [
   "./",
   "./index.html",

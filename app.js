@@ -374,7 +374,12 @@ function renderEventCard(event) {
   const node = els.eventTemplate.content.firstElementChild.cloneNode(true);
 
   node.querySelector(".event-date").textContent = formatDateLabel(event.dateISO);
-  node.querySelector(".event-title").textContent = event.title;
+  const titleLink = document.createElement("a");
+  titleLink.href = event.scheduleUrl;
+  titleLink.target = "_blank";
+  titleLink.rel = "noreferrer";
+  titleLink.textContent = event.title;
+  node.querySelector(".event-title").append(titleLink);
   node.querySelector(".theater-badge").textContent = event.theaterLabel;
   node.querySelector(".event-time").textContent = eventTime(event);
 
@@ -382,12 +387,12 @@ function renderEventCard(event) {
   renderMembers(membersEl, event);
 
   const linksEl = node.querySelector(".event-links");
-  linksEl.append(makeLink("公式日程", event.scheduleUrl));
+  linksEl.append(makeLink("公式ページで確認", event.scheduleUrl, "is-primary"));
   if (event.ticketUrl) {
-    linksEl.append(makeLink("チケット", event.ticketUrl));
+    linksEl.append(makeLink("チケット申込", event.ticketUrl));
   }
   if (event.onlineTicketUrl) {
-    linksEl.append(makeLink("オンライン", event.onlineTicketUrl));
+    linksEl.append(makeLink("オンライン申込", event.onlineTicketUrl));
   }
   if (event.posterUrl) {
     linksEl.append(makeLink("ポスター", event.posterUrl));
@@ -415,9 +420,9 @@ function renderMembers(container, event) {
   container.textContent = "出演者未定";
 }
 
-function makeLink(label, url) {
+function makeLink(label, url, variant = "") {
   const link = document.createElement("a");
-  link.className = "event-link";
+  link.className = ["event-link", variant].filter(Boolean).join(" ");
   link.href = url;
   link.target = "_blank";
   link.rel = "noreferrer";

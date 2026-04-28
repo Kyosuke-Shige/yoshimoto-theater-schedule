@@ -286,6 +286,17 @@ main {
   letter-spacing: 0;
 }
 
+.event-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.event-title a:hover {
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .theater-badge {
   flex: 0 0 auto;
   max-width: 150px;
@@ -348,6 +359,16 @@ main {
 
 .event-link:hover {
   border-color: var(--teal);
+}
+
+.event-link.is-primary {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: #fff;
+}
+
+.event-link.is-primary:hover {
+  background: #0b6466;
 }
 
 .empty-state,
